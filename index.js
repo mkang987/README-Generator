@@ -13,6 +13,11 @@ const userQuestion = () => {
         },
         {
             type: 'input',
+            name: 'Link',
+            message: 'What is the repo link?',
+        },
+        {
+            type: 'input',
             name: 'Description',
             message: 'Give a brief description of the project. What is it used for, what kinds of problems does it solve, What did you learn from this project?'
         },
@@ -61,7 +66,7 @@ const userQuestion = () => {
 }
 
 // TODO: Create a function to write README file
-function generateREADME({Title, Description, Installation, Usage, Contributing, Tests, License, Credits, Email, GitHub}) {
+function generateREADME({Title, Link, Description, Installation, Usage, Contributing, Tests, License, Credits, Email, GitHub}) {
     const answers = [Title, Description, Installation, Usage, Contributing, Tests, License, Credits, Email, GitHub];
 
 
@@ -69,20 +74,33 @@ function generateREADME({Title, Description, Installation, Usage, Contributing, 
 return `# ${Title}
     
 ## Table of Contents
-1.[Description](#Description)
-2.[Installation](#Installation)
-3.[Usage](#Usage)
-4.[Contributing](#Contributing)
-5.[Tests](#Tests)
-6.[License](#License)
-7.[Credits](#Credits)
-8.[Questions](#Contacts)
+1.[Description](#Description)   
+2.[Link](#Link)     
+3.[Installation](#Installation)     
+4.[Usage](#Usage)   
+5.[Contributing](#Contributing)     
+6.[Tests](#Tests)   
+7.[License](#License)   
+8.[Credits](#Credits)   
+9.[Questions](#Contacts)    
 
+## Link to repo
+${Link}
 ## Description
 ${Description}
-## Licences
-![License](${licenseGenerator(License)})
-
+## Licenses
+![License](${licenseGenerator(License)})    
+[License Information](./generatedLicense.md)
+## Installation
+${Installation}
+## Usage
+${Usage}
+## Contribution
+${Contributing}
+## Credits
+${Credits}
+## Contacts
+Contact me via Email at ${Email}
     `;
 }
 
@@ -92,12 +110,15 @@ function licenseGenerator(license) {
     switch(license){
         case "MIT":
             licenseBadge = "https://img.shields.io/badge/license-MIT-green"
+            fs.writeFileSync('generatedLicense.md',liscenseList.MITLicense);
             break;
         case "Apache":
             licenseBadge = "https://img.shields.io/badge/license-Apache-blue"
+            fs.writeFileSync('generatedLicense.md',liscenseList.apacheLicense);
             break;
         case "GNU GPL":
             licenseBadge = "https://img.shields.io/badge/license-GPL-red"
+            fs.writeFileSync('generatedLicense.md',liscenseList.gnuLicense);
             break;
     }
     return licenseBadge;
