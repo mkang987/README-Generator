@@ -901,4 +901,4 @@ module.exports = {
     MITLicense: MITLicense,
     apacheLicense: apacheLicense,
     gnuLicense: gnuLicense,
-};
+}; 
